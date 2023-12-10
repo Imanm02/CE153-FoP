@@ -19,7 +19,7 @@ In the "Assignments" folder, you will find the solutions to the seven practical 
 
 ## Slides
 
-The "Slides" folder contains the course slides used by Dr. Rivadeh during the lectures.
+The "Slides" folder contains the course slides used by Dr. Fakouri during the lectures.
 
 ## Source
 
