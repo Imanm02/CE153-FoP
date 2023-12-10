@@ -19,7 +19,7 @@ In the "Assignments" folder, you will find the solutions to the seven practical 
 
 ## Codenameh
 
-The "Codenameh" folder contains the course exclusive contents created by TAs of the course.
+The folder labeled "Codenameh" houses exclusive course materials developed by the Teaching Assistants of the course.
 
 ## Source
 
