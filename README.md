@@ -9,7 +9,7 @@ This repository contains solutions to the assignments and exams, course slides, 
 
 - [Overview](#overview)
 - [Assignments](#assignments)
-- [Slides](#slides)
+- [Codenameh](#codenameh)
 - [Source](#source)
 - [Maintainer](#Maintainer)
 
@@ -17,9 +17,9 @@ This repository contains solutions to the assignments and exams, course slides, 
 
 In the "Assignments" folder, you will find the solutions to the seven practical assignments given during the course.
 
-## Slides
+## Codenameh
 
-The "Slides" folder contains the course slides used by Dr. Fakouri during the lectures.
+The "Codenameh" folder contains the course exclusive contents created by TAs of the course.
 
 ## Source
 
