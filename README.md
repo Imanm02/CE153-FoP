@@ -3,7 +3,7 @@ Solutions to Dr. Fakouri's CE153: Fundamentals of Programming (Sharif University
 
 ## Overview
 
-This repository contains solutions to the assignments and exams, course slides, and other useful resources for the CE153: Software Engineering course at Sharif University of Technology, Fall 2023, taught by Dr. Rivadeh.
+This repository contains solutions to the assignments and exams, course slides, and other useful resources for the CE153: Fundamentals of Programming course at Sharif University of Technology, Fall 2020, taught by Dr. Fakouri.
 
 ## Table of Contents
 
