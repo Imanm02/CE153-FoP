@@ -1,64 +1,79 @@
 #include <stdio.h>
 #include <stdlib.h>
-// armin saghafian
+
 int main()
 {
-    long long int *arr1 = (long long int *)calloc(10010, sizeof(long long));
-    long long int *arr2 = (long long int *)calloc(10010, sizeof(long long));
-    long long int num1, num2, count = 0;
-    while(!0){
-        scanf("%lld", &num1);
-        if (num1 == -1){
-            break;
-        }else {
-            scanf("%lld", &num2);
-        }
-        *(arr1 + count) = num1;
-        *(arr2 + count) = num2;
-        count++;
+
+    int size = 100;
+    int ** a = (int **) malloc(size * sizeof(int *));
+    for(int i=0; i< size; i++){
+        *(a+i) = malloc( 2* sizeof(int));
     }
-    int temp = 1;
-    for (int i = 0; i <= count; i++){
-        for (int j = i + 1; j <= count; j++){
-            if (*(arr2 + i) == *(arr2 + j)) {
-                *(arr2 + j) = 0;
-                temp = 0;
+
+    int code = 0;
+    int num_of_people = 0;
+
+    scanf( "%d", &code);
+    while( code != -1 ){
+        if (num_of_people >= size){
+            a = realloc( a, (size+100) * sizeof( int *));
+
+            for(int i= size ; i< size +100; i++){
+                *( a+i ) = malloc( 2* sizeof( int ));
+            }
+            size += 100;
+        }
+
+        *(*(a+ num_of_people)) = code;
+
+        scanf("%d", *(a+ num_of_people) + 1);
+        scanf("%d", &code);
+
+        if ( code != -1)
+            num_of_people ++;
+        }
+
+    int winner_index ;
+    int min_num;
+    int has_winner = 0;
+    int isrepeated;
+
+    for (int i=0; i<= num_of_people; i++){
+        isrepeated = 0;
+        for (int j =0; j<= num_of_people; j++){
+            if (i!= j && *(*(a+i)+1) == *(*(a+j) + 1) ) {
+               isrepeated = 1;
             }
         }
-        if (temp == 0) {
-            *(arr2 + i) = 0;
-            temp = 1;
-        }
-    }
-    long long int min = -10;
-    for (int i = 0; i <= count; i++) {
-        if (*(arr2 + i) > 0 || *(arr2 + i) < 0) {
-            min = *(arr2 + i);
-            break;
-        }
-    }
-    if (min == -10){
-        printf("no one won.");
-        return 0;
-    }
-    int temp3;
-    for (int i = 0; i <= count; i++){
-        if ( *(arr2 + i) < min && *(arr2 + i) != 0){
-            min = *(arr2 + i);
-            temp3 = i;
-        }
-    }
-    int temp2 = 0;
-    for (int i = 0; i <= count; i++){
-        if (*(arr1 + temp3) == *(arr1 + i)){
-            temp2++;
+
+        if (isrepeated == 0){
+            if (has_winner == 0 || *(*(a+i)+1)< min_num ){
+                min_num = *(*(a+i)+1);
+                winner_index = i;
+                has_winner = 1;
+            }
         }
     }
 
-    if ( temp2 != 1 ){
-        printf("%d cheated.", *(arr1 + temp3));
-    }else{
-        printf("%d won.", *(arr1 + temp3));
+    if( has_winner ){
+        int count = 0;
+        for (int i=0; i <= num_of_people; i++ ){
+            if (*(*( a+i)) == *(*(a + winner_index)) )
+                count++;
+        }
+        if(count ==1)
+            printf("%d won.", *(*(a + winner_index)));
+        else
+            printf("%d cheated.", *(*(a + winner_index)));
     }
+    else{
+        printf("no one won.");
+    }
+
+    for(int i=0; i< size; i++){
+        free (*(a+i));
+    }
+
+    free(a);
     return 0;
 }

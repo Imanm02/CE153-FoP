@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-// armin saghafian
+
 int main()
 {
     int mabnayeaddad;
