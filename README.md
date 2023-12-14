@@ -1,10 +1,40 @@
-# Command Line Messenger
+# CE153-FOP
+Solutions to Dr. Fakouri's CE153: Fundamentals of Programming (Sharif University of Technology - Fall 2020) Assignments
 
-This is my Fall 2021 Fundamentals of Programming Course's project at Sharif University of Technology.
+## Overview
 
-First Phase: Client </br>
-Second Phase: Server
+This repository contains solutions to the assignments and exams, course slides, and other useful resources for the CE153: Fundamentals of Programming course at Sharif University of Technology, Fall 2020, taught by Dr. Fakouri.
 
-## Docs
-First doc includes client phase.
-Second doc includes server phase.
+## Table of Contents
+
+- [Overview](#overview)
+- [Assignments](#assignments)
+- [Project](#project)
+- [Exams](#exams)
+- [Codenameh](#codenameh)
+- [Source](#source)
+- [Maintainer](#Maintainer)
+
+## Assignments
+
+In the "Assignments" folder, you will find the solutions to the seven practical assignments given during the course.
+
+## Project
+
+In the "Project" folder, you will find my implementation of the Course's project.
+
+## Exams
+
+In the "Exams" folder, you will find the solutions to the midterm and final of the course.
+
+## Codenameh
+
+The folder labeled "Codenameh" houses exclusive course materials developed by the Teaching Assistants of the course.
+
+## Source
+
+The "Source" folder contains any additional course materials used in the lectures or assignments.
+
+## Maintainer
+
+- [Iman Mohammadi](https://github.com/Imanm02)
