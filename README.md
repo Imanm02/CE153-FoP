@@ -9,6 +9,7 @@ This repository contains solutions to the assignments and exams, course slides, 
 
 - [Overview](#overview)
 - [Assignments](#assignments)
+- [Project](#project)
 - [Exams](#exams)
 - [Codenameh](#codenameh)
 - [Source](#source)
@@ -17,6 +18,10 @@ This repository contains solutions to the assignments and exams, course slides, 
 ## Assignments
 
 In the "Assignments" folder, you will find the solutions to the seven practical assignments given during the course.
+
+## Project
+
+In the "Project" folder, you will find my implementation of the Course's project.
 
 ## Exams
 
