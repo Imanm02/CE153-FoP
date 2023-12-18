@@ -1,6 +1,7 @@
 #include "grader.h"
 #include <stdio.h>
 #include <stdarg.h>
+
 #define calc(a, b, c) ((a) c (b))
 
 long long int maximum(long long int a, long long int b, long long int c)

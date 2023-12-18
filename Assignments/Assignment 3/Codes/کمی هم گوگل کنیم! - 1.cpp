@@ -1,6 +1,7 @@
 #include "grader.h"
 #include <stdio.h>
 #include <stdarg.h>
+
 #define calc(a, b, c) ((a) c (b))
 
 long long int maximum(long long int a, long long int b, long long int c)
@@ -38,6 +39,7 @@ long long int majmomaghh(long long int n) {
     }
     return p;
 }
+
 #if s == 0
 long long int findDivisorSum(char d, int a, int b, int c){
         if(d == 'M'){
@@ -46,7 +48,8 @@ long long int findDivisorSum(char d, int a, int b, int c){
         else if(d == 'm'){
             return minimum(majmomaghh(a), majmomaghh(b), majmomaghh(c));
         }
-    }
+}
+
 #else
 long long int findDivisorSum(int a, ...){
         va_list arg;
@@ -57,7 +60,9 @@ long long int findDivisorSum(int a, ...){
             long long int b = majmomagh(va_arg(arg, long long int));
             if (javabema>b) {javabema = b;}}
         va_end(arg);
-        return javabema;}
+        return javabema;
+}
+
 #endif
 
 long long run(char type, int num1, int num2, int num3, int num4) {
