@@ -1,66 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
+int main() {
+    int testCases;
+    scanf("%d", &testCases);
 
-    long long int n = 0;
-    int t = 0, sas = 0;
-    long long int a = 0, p = 0, s = 0;
-    long long int a1 = 0, a2 = 0, b1 = 0, b2 =0;
-    char c;
-    int moves = 0;
+    long long sequenceLength, currentValue, previousValue, prePreviousValue;
+    int zigZagCount, isZigZag;
+    long long answer = 0, powerOfTwo;
 
-    scanf("%d", &t);
+    for (int i = 0; i < testCases; i++) {
+        scanf("%lld", &sequenceLength);
 
-    for(int i = t; i > 0; i--){
-        scanf("%ld", &n);
+        zigZagCount = 0;
 
-        moves = 0;
+        if (sequenceLength > 1) {
+            scanf("%lld", &previousValue);
+            scanf("%lld", &currentValue);
 
-        scanf("%lld%*c", &a);
+            for (int j = 0; j < sequenceLength - 2; j++) {
+                prePreviousValue = previousValue;
+                previousValue = currentValue;
+                scanf("%lld", &currentValue);
 
-        if(n != 1){
-            a2 = a;
-            scanf("%lld%*c", &a);
-            a1 = a;
-            for(long int e = n; e > 2; e--){
-                scanf("%lld%*c", &a);
-                if(a==a1){
-                    a2==a1;
-                    continue;
+                if ((currentValue - previousValue) * (previousValue - prePreviousValue) < 0) {
+                    zigZagCount++;
                 }
-                b2 = a - a1;
-                b1 = a1 - a2;
-                if(b1 * b2 < 0){
-                    moves++;
-                }
-                a2 = a1;
-                a1 = a;
             }
-            if(moves < 2){
-                sas = 1;
-            } else {
-                sas = 0;
-            }
-            p = sas << i;
-            s = p + s;
-        } else {
-            p = 1 << i;
-            s = p + s;
-        }
-    }
-    
-    for(int i = t; i > 0; i--){
-        p = 1 << i;
-        sas = s / p;
-        s = s % p;
 
-        if(sas == 1){
-            printf("YES\n");
+            isZigZag = (zigZagCount < 2) ? 1 : 0;
         } else {
-            printf("NO\n");
+            isZigZag = 1;
         }
+
+        powerOfTwo = 1LL << (testCases - i - 1);
+        answer += isZigZag * powerOfTwo;
     }
-    
+
+    for (int i = testCases; i > 0; i--) {
+        powerOfTwo = 1LL << (testCases - i);
+        isZigZag = answer / powerOfTwo;
+        answer %= powerOfTwo;
+
+        printf("%s\n", isZigZag ? "YES" : "NO");
+    }
+
     return 0;
 }

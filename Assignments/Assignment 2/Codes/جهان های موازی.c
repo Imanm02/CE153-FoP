@@ -1,34 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
-{
-    long long int a, b, c, d, g, e, t;
+int main() {
+    long long a, b, c, d;
+    scanf("%lld %lld", &a, &b);
+    scanf("%lld %lld", &c, &d);
 
-    scanf("%lld%lld", &a, &b);
-    scanf("%lld%lld", &c, &d);
+    long long maxProduct = a * c;
+    maxProduct = (maxProduct > b * d) ? maxProduct : b * d;
+    maxProduct = (maxProduct > a * d) ? maxProduct : a * d;
+    maxProduct = (maxProduct > b * c) ? maxProduct : b * c;
 
-    if (a*c>b*d){
-        g=a*c;
-    }
-    else{
-        g=b*d;
-    }
-    
-    if (g>a*d){
-        e=g;
-    }
-    else{
-        e=a*d;
-    }
-
-    if (e>b*c){
-        t=e;
-    }
-    else{
-        t=b*c;
-    }
-
-    printf("%lld", t);
+    printf("%lld", maxProduct);
     return 0;
 }
