@@ -8,6 +8,7 @@ typedef struct {
     int users_count;
     int userId[MaxUser];
 }Level;
+
 typedef struct {
     int money;
     int level;
@@ -15,9 +16,11 @@ typedef struct {
     char username[StringSize];
     char introducer[StringSize];
 }User;
+
 typedef struct {
     int money;
 }Benjamin;
+
 User * new_user(int money, int level, char *username,char * introducer){
     User * NewUser = malloc(sizeof(User));
     NewUser->money = money;
@@ -27,6 +30,7 @@ User * new_user(int money, int level, char *username,char * introducer){
     memset(NewUser->introducer,0,StringSize); strcpy(NewUser->introducer,introducer);
     return NewUser;
 }
+
 Level * new_level(){
     Level *NewLevel = malloc(sizeof(Level));
     for (int i = 0; i < MaxUser; ++i) {
@@ -35,7 +39,8 @@ Level * new_level(){
     NewLevel->users_count = 0;
     return NewLevel;
 }
-int main() {
+
+int main(){
     Benjamin benjamin;
     benjamin.money = 0;
     char command[StringSize] = {0};
@@ -46,7 +51,7 @@ int main() {
     Users[0] = new_user(0,0,"\0","\0");
     while (1){
         memset(command,0,StringSize);
-        scanf("%[^\n]s",command);
+        scanf("%[^\n]s", command);
         scanf("%*c");
         if (StartWith("End",command)){
             break;
@@ -327,7 +332,7 @@ int main() {
     }
     return 0;
 }
-int StartWith(const char *pre, const char *str)
-{
+
+int StartWith(const char *pre, const char *str){
     return strncmp(pre, str, strlen(pre)) == 0;
 }
