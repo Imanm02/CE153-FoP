@@ -5,7 +5,7 @@
 
 int find_substring_repetition( char * string , char * substring );
 void delete_substring( char * string , char * substring );
-void reverse( char * string , char * hold, int m, int n);  // I'm passing hold only because I don't want to allocate any more memory!
+void reverse( char * string , char * hold, int m, int n);
 
 int print_mode = 1;
 
@@ -19,7 +19,7 @@ int main() {
 
     while ( strcmp( order, "exit") != 0){
 
-        if ( strncmp ( order, "copy", 4 ) == 0 ){ // copy [n]
+        if ( strncmp ( order, "copy", 4 ) == 0 ){
             if ( strcmp ( order, "copy") == 0) {
                 strcpy( hold, string);
                 strcat(string, hold);
@@ -116,9 +116,6 @@ int main() {
         }
         else if ( strcmp( order, "print") == 0 )
             printf("%s\n", string );
-
-//        if( strncmp ( order , "PRINT_MODE", 10 ) != 0 &&  strcmp( order, "print") != 0 && print_mode == 1 )
-
         gets(order);
     }
 
@@ -140,8 +137,6 @@ int find_substring_repetition( char * string , char * substring ){
 }
 
 void delete_substring( char * string , char * substring ) {
-
-
 
     int i = 0, k;
     while( i < strlen(string)) {

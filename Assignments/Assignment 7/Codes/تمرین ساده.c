@@ -3,8 +3,8 @@
 #include <string.h>
 
 void delete_spaces( char * string);
-int compare_chars( char a, char b); // returns 0 if equal; 1 if a>b and -1 if a<b
-int compare_strings( char * str1 , char * str2); // returns 0 if equal; 1 if a> b and -1 if a<b
+int compare_chars( char a, char b);
+int compare_strings( char * str1 , char * str2);
 
 int main() {
     int n;
@@ -27,7 +27,6 @@ int main() {
         for ( int j= i+1; j< n; j++) {
             if ( compare_strings(a[i], a[j]) == -1 ) {
 
-              //  printf("%s is greater than %s\n", a[j], a[i]);
                 strcpy( b_hold, b[i]);
                 strcpy( a_hold, a[i]);
 
@@ -53,7 +52,7 @@ int main() {
     return 0;
 }
 void delete_spaces( char * string){
-    int n = strlen( string) +1; // I wanna count the '\0'
+    int n = strlen( string) +1;
     for ( int i=0; i< n; i++){
         if( string[i] == ' '){
             n--;
