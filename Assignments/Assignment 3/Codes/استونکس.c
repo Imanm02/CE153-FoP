@@ -1,143 +1,109 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-long long int aval(long long int n){
-
-    if (n == 1) {return 0;}
-    else if (n == 2) {return 1;}
-    for(int i=2;i<=n/2;i++){
-    if (n % i == 0) {return 0;}
-}
-return 1;
-}
-long long int tedadmaghsoom(long long int n) {
-    int p=2;
-    if (n==1) {return 1;}
-    for (long long int i=2; i<=n/2; i++){
-        if (n%i==0) {p += 1;}
-        else {p += 0;}
-    }
-    return p;
-}
-
-
-long long int len(long long int n){
-    int c = 0;
-    if (n == 0){
-        return 1;}
-    while (n >= 1){
-        n = n / 10;
-        c += 1;
-    }
-    return c;
-}
-
-
-long long int zarbargham(long long int n){
-    long long int m = 1;
-    int help = len(n);
-    for (int i=1; i <= help; i++){
-        m *= n%10;
-        n /= 10;
-    }
-
-    return m;
-}
-
-long long int tedadmaghsoomaval(long long int n) {
-    int p=0;
-    for (int i=2; i<=n; i++){
-        if (n%i==0 && tedadmaghsoom(i)==2) {p += 1;}
-    }
-    return p;
-}
-
-long long int shiftr(long long int n){
-    int m = n;
-    m = m/10;
-    int c = 1;
-    int help = len(n);
-    for(int i = 0;i<help-1;i++){
-        c *= 10;
-    }
-    m = m + (n%10)*c;
-    return m;
-}
-long long int halghavi(long long int n){
-    int i;
-    int help = len(n);
-    for(i=0;i<help;i++){
-        if (!aval(n)) {return 0;}
-        n = shiftr(n);
+long long isPrime(long long n) {
+    if (n <= 1) return 0;
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) return 0;
     }
     return 1;
 }
 
-long long int majmooargham(long long int n) {
-    int m = 0;
-    int help = len(n);
-    for (int i=1; i <= help; i++){
-        m += n%10;
+long long countDivisors(long long n) {
+    long long count = 0;
+    for (long long i = 1; i <= n; i++) {
+        if (n % i == 0) count++;
+    }
+    return count;
+}
+
+long long digitLength(long long n) {
+    return (n == 0) ? 1 : (long long)log10(n) + 1;
+}
+
+long long productOfDigits(long long n) {
+    long long product = 1;
+    while (n > 0) {
+        product *= n % 10;
         n /= 10;
     }
-
-    return m;
+    return product;
 }
 
-long long int ghadrmotlagh(long long int a){
-if (a < 0) {return (-1 * a);}
-return a;
-}
-
-long long int majmoomaghsoomaval(long long int n) {
-    int p=0;
-    for (int i=2; i<=n; i++){
-        if (n%i==0 && tedadmaghsoom(i)==2) {p += i;}
+long long countPrimeDivisors(long long n) {
+    long long count = 0;
+    for (long long i = 2; i <= n; i++) {
+        if (n % i == 0 && isPrime(i)) count++;
     }
-    return p;
+    return count;
 }
 
+long long rotateRight(long long n) {
+    int lastDigit = n % 10;
+    n /= 10;
+    int digits = digitLength(n);
+    return lastDigit * pow(10, digits) + n;
+}
 
-int main()
-{
-    float g;
-    long long int n, a, b, c, d, e, o, q, w;
-    float k=-99999999;
+long long isCircularPrime(long long n) {
+    for (int i = 0; i < digitLength(n); i++) {
+        if (!isPrime(n)) return 0;
+        n = rotateRight(n);
+    }
+    return 1;
+}
+
+long long sumOfDigits(long long n) {
+    long long sum = 0;
+    while (n > 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+    return sum;
+}
+
+long long absoluteValue(long long n) {
+    return (n < 0) ? -n : n;
+}
+
+long long sumOfPrimeDivisors(long long n) {
+    long long sum = 0;
+    for (long long i = 2; i <= n; i++) {
+        if (n % i == 0 && isPrime(i)) sum += i;
+    }
+    return sum;
+}
+
+int main() {
+    long long n, a, b, c, d, e, output, value, maxRatio = -99999999;
+    long long bestOption;
     scanf("%lld", &n);
-    int i;
-    for (i=1; i<=n; i++) {
+    for (long long i = 0; i < n; i++) {
         scanf("%lld %lld %lld %lld %lld", &a, &b, &c, &d, &e);
-        if (b==0) {o = 0;}
-        else if (halghavi(b)) {o = majmooargham(b);}
-        else {o = -1 * tedadmaghsoomaval(b);}
 
+        // Compute output value
+        output = (b == 0) ? 0 : (isCircularPrime(b) ? sumOfDigits(b) : -countPrimeDivisors(b));
 
-        long long int x = d - e;
-        if (x==0) {q=0;}
-
-        else if (x>0) {
-            if (ghadrmotlagh(x) % tedadmaghsoom(x) == 0) {
-            q = zarbargham(x);
-        }
-            else {q = majmoomaghsoomaval(x);}
-        }
-         else {if (ghadrmotlagh(x) % tedadmaghsoom(-1 * x) == 0) {
-            q = -1 * zarbargham(-1 * x);
-        }
-            else {q = -1 * majmoomaghsoomaval(-1 * x);}
-
+        long long diff = d - e;
+        if (diff == 0) {
+            value = 0;
+        } else {
+            long long divisorCount = countDivisors(absoluteValue(diff));
+            if (absoluteValue(diff) % divisorCount == 0) {
+                value = (diff > 0) ? productOfDigits(diff) : -productOfDigits(-diff);
+            } else {
+                value = (diff > 0) ? sumOfPrimeDivisors(diff) : -sumOfPrimeDivisors(-diff);
+            }
         }
 
-
-        printf("%lld%%\n", q+o);
-        g = (float)(q+o)/c;
-        if (g>k) {
-                k=g;
-                w=a;
+        printf("%lld%%\n", value + output);
+        float ratio = (float)(value + output) / c;
+        if (ratio > maxRatio) {
+            maxRatio = ratio;
+            bestOption = a;
         }
-
     }
-    printf("Best option: %lld", w);
+    printf("Best option: %lld", bestOption);
 
     return 0;
 }

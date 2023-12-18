@@ -1,35 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
-    int x,y,t;
-    scanf("%d" ,&t);
-    while(t--){
-        scanf("%d%d" ,&x,&y);
-        if (check(x,y))
-            printf("YES\n");
-        else
-            printf("NO\n");
-}
-    return 0;
-}
-int check (x,y) {
-    int a=1;
-    if (x==1 && y!=1) {
-        a=0;
+int isMovePossible(int x, int y) {
+    if ((x == 1 && y != 1) || (x <= 3 && y > 3) || (x == 0)) {
+        return 0;
     }
-    else if (x==2 && y>3) {
-        a=0;
-    }
-    else if (x==3 && y>3) {
-        a=0;
-    }
-    else if (x==0) {
-        a=0;
-    }
-    else {
-        a=1;
-}
-    return a;
+    return 1;
 }
 
+int main() {
+    int testCases, x, y;
+    scanf("%d", &testCases);
+    while (testCases--) {
+        scanf("%d %d", &x, &y);
+        printf("%s\n", isMovePossible(x, y) ? "YES" : "NO");
+    }
+    return 0;
+}

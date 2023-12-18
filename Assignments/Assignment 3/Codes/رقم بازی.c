@@ -1,61 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
-int main()
-{
-    int t;
-    scanf("%d\n", &t);
-    for (int i=0; i < t; i++) {
-        long long int n;
-        scanf("%lld\n", &n);
-        if (amount(n)%2==0) {
-                if (shans(n)) {
-                        printf("2\n");
-                    }
-                else {printf("1\n");}
-        }
-        else {
-                if (OPOP(n)) {
-                        printf("1\n");
-                    }
-                else {printf("2\n");
-        }
-    }}
+
+int digitCount(long long n) {
+    int count = 0;
+    do {
+        count++;
+        n /= 10;
+    } while (n > 0);
+    return count;
+}
+
+int hasEvenDigitEveryOther(long long n) {
+    while (n > 0) {
+        if ((n % 100) / 10 % 2 == 0) return 1;
+        n /= 100;
+    }
     return 0;
 }
-int amount(long long int a)
-{
-    int p=0;
-     if (a == 0){
-        return 1;
+
+int hasOddDigitEveryOther(long long n) {
+    while (n > 0) {
+        if ((n % 100) / 10 % 2 != 0) return 1;
+        n /= 100;
     }
-    while(a>0)
-    {
-        a=a/10;
-        p++;
-    }
-    return p;
+    return 0;
 }
 
-int shans(long long int m){
-    long long int k = m;
-    int a=0;
-        while (k > 0){
-            if (k % 2 == 0) {
-                a = 1;
-        }
-            k /= 100;
-    }
-    return a;
-}
+int main() {
+    int testCases;
+    scanf("%d", &testCases);
+    while (testCases--) {
+        long long n;
+        scanf("%lld", &n);
 
-int OPOP(long long int m){
-    long long int k = m;
-    int a=0;
-        while (k > 0){
-            if (k % 2 != 0) {
-                a = 1;
+        if (digitCount(n) % 2 == 0) {
+            printf("%d\n", hasEvenDigitEveryOther(n) ? 2 : 1);
+        } else {
+            printf("%d\n", hasOddDigitEveryOther(n) ? 1 : 2);
         }
-            k /= 100;
     }
-    return a;
+    return 0;
 }
