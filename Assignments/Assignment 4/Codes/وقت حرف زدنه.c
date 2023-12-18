@@ -1,28 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
-int a=1, b=0;
-int main()
-{
-   geta();
-   if (b>=a) {printf("%d. YES", 2*a);}
-   else {printf("%d. NO", a+b+1);}
+
+int countA = 1, countB = 0;
+
+void countACharacters();
+void countBCharacters();
+
+int main() {
+    countACharacters();
+    if (countB >= countA) printf("%d. YES", 2 * countA);
+    else printf("%d. NO", countA + countB);
 }
-void geta()
-{
-    char talk;
-    scanf("%c", &talk);
-    if (talk == 'a'){
-        a++;
-        geta();}
-    else if (talk == 'b'){
-        b++;
-        getb();}
+
+void countACharacters() {
+    char character;
+    scanf("%c", &character);
+    if (character == 'a') {
+        countA++;
+        countACharacters();
+    } else if (character == 'b') {
+        countB++;
+        countBCharacters();
+    }
 }
-void getb()
-{
-    char talk;
-    scanf("%c", &talk);
-    if (talk == 'b'){
-        b++;
-        getb();}
+
+void countBCharacters() {
+    char character;
+    scanf("%c", &character);
+    if (character == 'b') {
+        countB++;
+        countBCharacters();
+    }
 }
