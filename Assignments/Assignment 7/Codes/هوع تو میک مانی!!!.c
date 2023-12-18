@@ -53,14 +53,14 @@ int main(){
         memset(command,0,StringSize);
         scanf("%[^\n]s", command);
         scanf("%*c");
-        if (StartWith("End",command)){
+        if (StartWith("End", command)){
             break;
         }
-        else if (StartWith("Create_a_table_for ",command)){
+        else if (StartWith("Create_a_table_for ", command)){
             char user[StringSize] = {0};
             int money = 0;
-            sscanf(command,"Create_a_table_for %s with_deposit_of %d",user,&money);
-            if (strlen(Users[0]->username)>0){
+            sscanf(command,"Create_a_table_for %s with_deposit_of %d", user, &money);
+            if (strlen(Users[0]->username) > 0){
                 printf("We already have a founder\n");
                 continue;
             }
