@@ -9,6 +9,7 @@ void print(char* str){
     if(PRINT_MODE)
         printf("%s\n",str);
 }
+
 char* append(char* str,char* t){
     int len = strlen(str) + strlen(t) + 1;
     char* newstr = realloc(str , len);
@@ -39,7 +40,6 @@ char* find(char* str,char* t){
             break;
         }
         n++;
-        //ask
         tmp = x + 1;
     }
     if(n==0){
@@ -103,7 +103,6 @@ char* delete_one(char* str,int i,int len){
     return str;
 }
 
-//ask
 char* delete(char* str,char* t){
     int i = 0;
     int t_len = strlen(t);

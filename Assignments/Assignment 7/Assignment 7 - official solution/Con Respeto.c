@@ -37,7 +37,6 @@ int main(){
     return 0;
 }
 
-
 Block* new_block(int n,int p){
     Block* tmp = malloc(sizeof(Block));
     tmp->n = n;
