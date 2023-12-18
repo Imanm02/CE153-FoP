@@ -1,39 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
-char second[33554432];
-int main()
-{
-    int num1, t;
-    char first[32] = {0,1,1,1,0,1,1,0,0,1,0,0,1,1,1,1,0,1,1,0,0,1,1,1,0,1,1,0,0,1,1,1};
-    char char1[6];
-    scanf("%d", &num1);
-    for (int i=0; i<num1; i++) {
-        t = i%32;
-        second[i] = first[t];
+
+void displayBitsInRange(int start, int end);
+void updateBitsInRange(int start, int end, int value);
+
+char bitArray[33554432];
+char initialBits[32] = {0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1};
+
+int main() {
+    int length;
+    scanf("%d", &length);
+
+    // Initialize bit array
+    for (int i = 0; i < length; i++) {
+        bitArray[i] = initialBits[i % 32];
     }
-    while (1){
-        scanf("%s", &char1);
-        if ( char1[0] == 'K' ) {return 0;}
-        else if ( char1[0] == 'G' ) {get();}
-        else if ( char1[0] == 'A' ) {attack();}
+
+    char command[6];
+    while (1) {
+        scanf("%s", command);
+        if (command[0] == 'K') return 0;
+        else if (command[0] == 'G') displayBitsInRange();
+        else if (command[0] == 'A') updateBitsInRange();
     }
     return 0;
 }
-void get()
-{
-    int num2, num3;
-    scanf("%d%d", &num2, &num3);
-    for(int i=num2; i<=num3; i++){
-        printf("%d", second[i-1]);
+
+void displayBitsInRange() {
+    int start, end;
+    scanf("%d%d", &start, &end);
+    for (int i = start; i <= end; i++) {
+        printf("%d", bitArray[i - 1]);
     }
     printf("\n");
 }
-void attack()
-{
-    int num4, num5, num6;
-    scanf("%d%d%d", &num4, &num5, &num6);
-    for(int j=num4; j<=num5; j++){
-        second[j-1] = num6;
+
+void updateBitsInRange() {
+    int start, end, value;
+    scanf("%d%d%d", &start, &end, &value);
+    for (int i = start; i <= end; i++) {
+        bitArray[i - 1] = value;
     }
     printf("\n");
 }
