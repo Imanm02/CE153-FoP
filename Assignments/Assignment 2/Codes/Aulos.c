@@ -11,49 +11,56 @@ int main(){
     int moves = 0;
 
     scanf("%d", &t);
+
     for(int i = t; i > 0; i--){
         scanf("%ld", &n);
+
         moves = 0;
+
         scanf("%lld%*c", &a);
+
         if(n != 1){
-        a2 = a;
-        scanf("%lld%*c", &a);
-        a1 = a;
-        for(long int e = n; e > 2; e--){
+            a2 = a;
             scanf("%lld%*c", &a);
-            if(a==a1){
-                a2==a1;
-                continue;
-            }
-            b2 = a - a1;
-            b1 = a1 - a2;
-            if(b1 * b2 < 0){
-                moves++;
-            }
-            a2 = a1;
             a1 = a;
-        }
-        if(moves < 2){
-            sas = 1;
+            for(long int e = n; e > 2; e--){
+                scanf("%lld%*c", &a);
+                if(a==a1){
+                    a2==a1;
+                    continue;
+                }
+                b2 = a - a1;
+                b1 = a1 - a2;
+                if(b1 * b2 < 0){
+                    moves++;
+                }
+                a2 = a1;
+                a1 = a;
+            }
+            if(moves < 2){
+                sas = 1;
+            } else {
+                sas = 0;
+            }
+            p = sas << i;
+            s = p + s;
         } else {
-            sas = 0;
-        }
-        p = sas << i;
-        s = p + s;
-        } else {
-        p = 1 << i;
-        s = p + s;
+            p = 1 << i;
+            s = p + s;
         }
     }
+    
     for(int i = t; i > 0; i--){
         p = 1 << i;
         sas = s / p;
-
         s = s % p;
+
         if(sas == 1){
             printf("YES\n");
         } else {
             printf("NO\n");
         }
-    } return 0;
+    }
+    
+    return 0;
 }
