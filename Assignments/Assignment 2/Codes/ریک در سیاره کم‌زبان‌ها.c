@@ -4,15 +4,18 @@
 int main(){
 
     int n, m;
+
     scanf("%d\n", &n);
     scanf("%d", &m);
+
     int c2 = 0, c4 = 0;
     int z;
     int o =1;
+
     for(int y = 0; y <n ; y++)
         {char c1;
-        scanf(" %c", &c1); /*  c1 = getchar(); */
-        switch (c1){ /*            تبدیل یه یه عدد چند رقمی   */
+        scanf(" %c", &c1);
+        switch (c1){
             case 'a' : c2 = c2*10 + 1;
         break;
             case 'b' : c2 = c2*10 + 2;
@@ -31,8 +34,9 @@ int main(){
         break;
             case 'i' : c2 = c2*10 + 9;
         break;
-        }/*     just like last one     */
+        }
     }
+
     for (int x = 0; x <m ; x++){
         char c3;
         scanf(" %c", &c3);
@@ -55,16 +59,17 @@ int main(){
         break;
             case 'i' : c4 = c4*10 + 9;
         break;}}
-     /*     مقایسه              */
     for (int z = 0; z < m ; z++){ o = o * 10; }
     int c5=0;
     for (int i = 0 ; i < n - m + 1 ; i++){
         if (c2 % o == c4){ break; }
     else {c5 = c5 + 1 ; c2 = c2 / 10;}}
-    int c6 = n - m - c5 ;/* After 100 times testing :)*/
+
+    int c6 = n - m - c5 ;
+
     if (c6 > 0){ printf("%d", c6);}
-        else if (c6 == 0){ printf("%d", c6); }
+    else if (c6 == 0){ printf("%d", c6); }
         else{ printf("-1"); }
 
-    return 0; // لطفا طراح این سوال رو معرفی کنید
+    return 0;
 }
