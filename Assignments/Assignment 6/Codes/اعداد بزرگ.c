@@ -2,52 +2,35 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main()
-{
-    int mabnayeaddad;
-    int max;
-    scanf("%d", &mabnayeaddad);
-    char *num1 = (char *)calloc(10000, sizeof(char)), *num2 = (char *)calloc(10000, sizeof(char)), *num3 = (char *)calloc(10000, sizeof(char));
-    scanf("%s%s", num1, num2);
-    int len_num1 = strlen(num1), len_num2 = strlen(num2);
-    if (len_num1 > len_num2){
-        for (int i = len_num2 - 1; i >= 0; i--){
-            *(num2 + i + len_num1 - len_num2) = *(num2 + i);
-        }
-        for (int i = 0; i < len_num1 - len_num2; i++){
-            *(num2 + i) = '0';
-        }
-    }else if (len_num1 < len_num2){
-        for (int i = len_num1 - 1; i >= 0; i--){
-            *(num1 + i + len_num2 - len_num1) = *(num1 + i);
-        }
-        for (int i = 0; i < len_num2 - len_num1; i++){
-            *(num1 + i) = '0';
-        }
+int main() {
+    int base;
+    char *num1 = calloc(10000, sizeof(char)), *num2 = calloc(10000, sizeof(char));
+    scanf("%d %s %s", &base, num1, num2);
+
+    int len1 = strlen(num1), len2 = strlen(num2);
+    int maxLength = (len1 > len2) ? len1 : len2;
+    char *result = calloc(maxLength + 2, sizeof(char));
+
+    // Pad the shorter number with zeros
+    if (len1 != len2) {
+        char *temp = calloc(maxLength, sizeof(char));
+        strcpy(temp + maxLength - ((len1 > len2) ? len1 : len2), (len1 > len2) ? num2 : num1);
+        strcpy((len1 > len2) ? num2 : num1, temp);
+        free(temp);
     }
-    if (len_num1 > len_num2) {
-        max = len_num1;
+
+    int carry = 0;
+    for (int i = maxLength - 1; i >= 0; i--) {
+        int sum = (num1[i] - '0') + (num2[i] - '0') + carry;
+        result[i + 1] = (sum % base) + '0';
+        carry = sum / base;
     }
-    else {max = len_num2;}
-    for (int i = max - 1; i >= 0; i--){
-        if (i == 0){
-            if ( *(num1 + i) + *(num2 + i) - 96 >= mabnayeaddad){
-                *(num3 + i) = *(num1 + i) + *(num2 + i) - mabnayeaddad - 96;
-                printf("1");
-            }else {
-                *(num3 + i) = *(num1 + i) + *(num2 + i) - 96;
-            }
-        }else{
-            if ( *(num1 + i) + *(num2 + i) - 96 >= mabnayeaddad){
-                (*(num1 + i - 1))++;
-                *(num3 + i) = *(num1 + i) + *(num2 + i) - mabnayeaddad - 96;
-            }else {
-                *(num3 + i) = *(num1 + i) + *(num2 + i) - 96;
-            }
-        }
-    }
-    for (int i = 0; i < max; i++){
-        printf("%d", *(num3 + i));
-    }
+    result[0] = carry + '0';
+
+    printf("%s", (result[0] != '0') ? result : result + 1);
+
+    free(num1);
+    free(num2);
+    free(result);
     return 0;
 }
