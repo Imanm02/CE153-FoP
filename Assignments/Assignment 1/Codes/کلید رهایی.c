@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
-{
-    long long int num;
+int main() {
+    long long int number;
 
-    scanf("%ld", &num);
-
-    printf("%ld", num%9);
+    scanf("%lld", &number);
+    printf("%lld", number % 9);
 
     return 0;
 }
