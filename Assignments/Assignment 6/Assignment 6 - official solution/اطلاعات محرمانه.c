@@ -1,74 +1,63 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<ctype.h>
 
-int n, m, l;
+int n,m,l;
 
-int findMaxSumInArray(int* array) {
-    int maxSum = 0;
-    for (int start = 0; start < l; start++) {
-        for (int end = start + 1; end <= l; end++) {
-            int currentSum = 0;
-            for (int index = start; index < end; index++) {
-                currentSum += array[index];
+int solve_int(int* ar){
+    int mx = 0;
+    for(int i=0;i<l;i++){
+        for(int j=i+1;j<=l;j++){
+            int sum = 0;
+            for(int k=i;k<j;k++){
+                sum += *(ar+k);
             }
-            if (currentSum > maxSum) {
-                maxSum = currentSum;
-            }
+            if(sum > mx)
+                mx = sum;
         }
     }
-    return maxSum;
+    return mx;
 }
 
-char findMaxCharInArray(char* array) {
-    char maxChar = 0;
-    for (int i = 0; i < l; i++) {
-        if (array[i] > maxChar) {
-            maxChar = array[i];
-        }
+char solve_char(char* ar){
+    char mx = 0;
+    for(int i=0;i<l;i++){
+        if(*(ar+i) > mx)
+            mx = *(ar+i);
     }
-    return tolower(maxChar);
+    return tolower(mx);
 }
 
-int main() {
-    scanf("%d %d %d", &n, &m, &l);
-    void*** arr = malloc(n * sizeof(void**));
-    int** results = malloc(n * sizeof(int*));
-
-    for (int i = 0; i < n; i++) {
-        arr[i] = malloc(m * sizeof(void*));
-        results[i] = malloc(m * sizeof(int));
-
-        for (int j = 0; j < m; j++) {
-            char type;
-            scanf(" %c", &type);
-
-            if (type == 'T') {
-                int* intArray = malloc(l * sizeof(int));
-                for (int k = 0; k < l; k++) {
-                    scanf("%d", &intArray[k]);
+int main(){
+    int i,j,k;
+    scanf("%d %d %d",&n,&m,&l);
+    void*** arr = malloc(n*sizeof(void**));
+    int** res = malloc(n * sizeof(int*));
+    for(i=0;i<n;i++){
+        *(arr+i) = malloc(m*sizeof(void*));
+        *(res+i) = malloc(m*sizeof(int));
+        for(j=0;j<m;j++){
+            char tmp;
+            scanf(" %c",&tmp);
+            if(tmp=='T'){
+                *(*(arr+i) + j) = malloc(sizeof(int)*l + sizeof(char));
+                *(char*)(*(*(arr+i) + j) + 0) = 1;
+                for(k=0;k<l;k++){
+                    scanf("%d",(int*)(*(*(arr+i) + j) + sizeof(char)+k*sizeof(int)));
                 }
-                results[i][j] = findMaxSumInArray(intArray);
-                free(intArray);
-            } else {
-                char* charArray = malloc(l * sizeof(char));
-                for (int k = 0; k < l; k++) {
-                    scanf(" %c", &charArray[k]);
-                }
-                results[i][j] = findMaxCharInArray(charArray);
-                free(charArray);
+                (*(*(res+i)+j)) = solve_int(*(*(arr+i) + j) + sizeof(char));
+                printf("%d ",(*(*(res+i)+j)));
             }
-
-            printf("%c ", results[i][j]);
+            else{
+                *(*(arr+i) + j) = malloc(sizeof(char)*l + sizeof(char));
+                *(char*)(*(*(arr+i) + j) + 0) = 0;
+                for(k=0;k<l;k++){
+                    scanf(" %c",(char*)(*(*(arr+i) + j) + sizeof(char)+k*sizeof(char)));
+                }
+                (*(*(res+i)+j)) = solve_char(*(*(arr+i) + j) + sizeof(char));
+                printf("%c ",(*(*(res+i)+j)));
+            }
         }
         printf("\n");
     }
-
-    for (int i = 0; i < n; i++) {
-        free(arr[i]);
-        free(results[i]);
-    }
-    free(arr);
-    free(results);
-    return 0;
 }

@@ -1,44 +1,49 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#define MAX_LENGTH 10010
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define M (10000+10)
 
-void reverseString(char* str) {
-    int len = strlen(str);
-    for (int i = 0; i < len / 2; i++) {
-        char temp = str[i];
-        str[i] = str[len - i - 1];
-        str[len - i - 1] = temp;
-    }
+void reverse(char* c){
+	int n = strlen(c);
+	for(int i=0;i<n-i-1;i++){
+		char tmp = *(c+i);
+		*(c+i) = *(c+n-i-1);
+		*(c+n-i-1) = tmp;
+	}
 }
 
-char* sumInRadix(char* num1, char* num2, int radix) {
-    reverseString(num1);
-    reverseString(num2);
-    char* result = calloc(MAX_LENGTH, sizeof(char));
-
-    int carry = 0;
-    for (int i = 0; i < MAX_LENGTH - 1; i++) {
-        int digitSum = carry;
-        if (num1[i]) digitSum += num1[i] - '0';
-        if (num2[i]) digitSum += num2[i] - '0';
-        result[i] = (digitSum % radix) + '0';
-        carry = digitSum / radix;
-    }
-    reverseString(result);
-
-    return result;
+char* sum(char* a,char* b,int r){
+	int n = strlen(a);
+	int m = strlen(b);
+	reverse(a);
+	reverse(b);
+	char* res = calloc(M,1);
+	int remain = 0;
+	int i;
+	for(i=0;i<n||i<m;i++){
+		int x = remain;
+		if(i<n)
+			x += *(a+i)-'0';
+		if(i<m)
+			x += *(b+i)-'0';
+		*(res+i) = (x%r)+'0';
+		remain = x/r;
+	}
+	while(remain>0){
+		*(res + i) = (remain%r)+'0';
+		remain = remain/r;
+	}
+	reverse(res);
+	return res;
 }
 
-int main() {
-    int radix;
-    scanf("%d", &radix);
-    char num1[MAX_LENGTH], num2[MAX_LENGTH];
-    scanf("%s %s", num1, num2);
-    
-    char* sumResult = sumInRadix(num1, num2, radix);
-    printf("%s", sumResult);
-    free(sumResult);
-
-    return 0;
+int main(){
+	int r;
+	scanf("%d",&r);
+	char* a = calloc(M,1);
+	char* b = calloc(M,1);
+	scanf("%s %s",a,b);
+	char* res = sum(a,b,r);
+	printf("%s",res);
+	return 0;
 }
