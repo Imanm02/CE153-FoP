@@ -1,108 +1,68 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <ctype.h>
 
-int set_max_char ( int * str);
-int set_max_sum ( int * arr);
+int n, m, l;
 
-int l;
-
-int main()
-{
-    int m,n;
-    scanf("%d%d%d",&n, &m, &l);
-
-    // setting the 3d input array
-    int *** voroodi = (int ***) malloc( n * sizeof( int** ));// satrha
-
-    for ( int i=0; i< n; i++){
-        *( voroodi + i ) = (int **) malloc ( m * sizeof( int *));// sotoon ha
-
-        for ( int j=0; j< m; j++){
-
-            *(*( voroodi +i ) +j ) = (int *) malloc ( ( l+1 ) * sizeof( int )); //too ha!
-
-            char f_or_t;
-            scanf("\n%c", &f_or_t);
-
-            if( f_or_t == 'F'){
-                for ( int k = 1; k <= l; k++){
-                    scanf("%*c%c", *( *( voroodi +i )+j )+k );
-                }
+int findMaxInt(int* array) {
+    int maxSum = 0;
+    for (int i = 0; i < l; i++) {
+        for (int j = i + 1; j <= l; j++) {
+            int sum = 0;
+            for (int k = i; k < j; k++) {
+                sum += array[k];
             }
-
-            else{  // f_or_t == 'T'
-                for ( int k = 1; k <= l; k++ ){
-                    scanf ("%d", *(*( voroodi + i) +j )+k );
-                }
+            if (sum > maxSum) {
+                maxSum = sum;
             }
-            // setting the F or T chars, they are not set as char, but the ascii code. F : 70 , T : 84
-            *( *( *( voroodi +i) +j)) = (int) f_or_t;
         }
     }
+    return maxSum;
+}
 
-    //declaring the 2d output array
-    int ** output = ( int **) malloc( n * sizeof( int *));
-    for ( int i=0; i< n; i++ ){
-        *( output + i) = malloc ( m * sizeof( int ));
-    }
-
-    for ( int i=0; i<n; i++ ){
-        for( int j=0; j< m; j++ ){
-            int ans;
-
-            if ( *(*(*( voroodi + i) +j)) == 70 ) //means F
-                ans = set_max_char( *(*( voroodi + i )+ j) );
-            else{ //T
-                ans = set_max_sum ( *(*( voroodi + i) +j) );
-
-            }
-
-            *(*( output + i) +j) = ans;
+char findMaxChar(char* array) {
+    char maxChar = 0;
+    for (int i = 0; i < l; i++) {
+        if (array[i] > maxChar) {
+            maxChar = array[i];
         }
     }
+    return tolower(maxChar);
+}
 
-    for ( int i=0; i< n; i++){
-        for ( int j=0; j<m; j++){
-            if(  *(*(*( voroodi + i) +j)) == 70 ) // F
-                printf("%c ", *(*( output + i) +j ));
-            else
-                printf("%d ", *(*( output + i) +j ));
+int main() {
+    scanf("%d %d %d", &n, &m, &l);
+    void*** inputArray = malloc(n * sizeof(void**));
+
+    for (int i = 0; i < n; i++) {
+        inputArray[i] = malloc(m * sizeof(void*));
+
+        for (int j = 0; j < m; j++) {
+            char dataType;
+            scanf(" %c", &dataType);
+
+            if (dataType == 'T') {
+                int* intArray = malloc(l * sizeof(int));
+                for (int k = 0; k < l; k++) {
+                    scanf("%d", &intArray[k]);
+                }
+                printf("%d ", findMaxInt(intArray));
+                free(intArray);
+            } else {
+                char* charArray = malloc(l * sizeof(char));
+                for (int k = 0; k < l; k++) {
+                    scanf(" %c", &charArray[k]);
+                }
+                printf("%c ", findMaxChar(charArray));
+                free(charArray);
+            }
         }
         printf("\n");
     }
 
+    for (int i = 0; i < n; i++) {
+        free(inputArray[i]);
+    }
+    free(inputArray);
     return 0;
 }
-
-int set_max_char( int * str){
-
-    int max=0;
-    for ( int i=1; i<=l; i++){
-        if ( (int) *( str + i ) > max )
-            max =(int) *( str+i);
-    }
-    if ( 65 <= max && max <= 90 ){
-        max += 32;
-    }
-    return max;
-}
-
-int set_max_sum ( int * arr){
-
-    int max_sum = 0;
-    int current_sum;
-
-    for ( int i=1; i<=l; i++ ){
-        current_sum = 0;
-
-        for ( int j=i; j<=l; j++){
-            current_sum += *( arr +j);
-            if ( current_sum > max_sum )
-                max_sum = current_sum;
-        }
-    }
-    return max_sum;
-}
-
-
