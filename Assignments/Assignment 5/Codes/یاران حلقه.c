@@ -1,38 +1,32 @@
 #include <stdio.h>
 
-int main()
-{
-    unsigned input, i, moves = 1;
-    int nobat = 1;
+int main() {
+    unsigned int numPlayers, currentPlayer = 1, remainingMoves = 1;
+    scanf("%u", &numPlayers);
+    unsigned int players[numPlayers];
 
-    scanf("%u", &input);
-    unsigned nums[input];
-
-    for ( i = 1; i <= input; i++ )
-    {
-        nums[i - 1] = i;
+    for (unsigned int i = 0; i < numPlayers; i++) {
+        players[i] = i + 1;
     }
 
-    while ( moves < input )
-    {
-        for ( i = 0; i < input; i++ )
-        {
-            if ( nums[i] != 0 )
-            {
-                nobat = !nobat;
-                if ( nobat )
-                {
-                    nums[i] = 0;
-                    moves++;
+    while (remainingMoves < numPlayers) {
+        for (unsigned int i = 0; i < numPlayers; i++) {
+            if (players[i] != 0) {
+                currentPlayer = !currentPlayer;
+                if (currentPlayer) {
+                    players[i] = 0;
+                    remainingMoves++;
                 }
             }
         }
     }
 
-    for ( i = 0; i < input; i++ )
-    {
-        if ( nums[i] != 0 ) {
-            printf("%u", nums[i]);
+    for (unsigned int i = 0; i < numPlayers; i++) {
+        if (players[i] != 0) {
+            printf("%u", players[i]);
+            break;
         }
     }
+
+    return 0;
 }
