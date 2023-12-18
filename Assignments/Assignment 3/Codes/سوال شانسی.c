@@ -1,41 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int shans(int m){
-    int k = m;
-    int a = 1;
-    while (k > 0){
-        if (k % 10 != 4 && k % 10 != 7) {
-            a = 0;
+int isLucky(int number) {
+    while (number > 0) {
+        int digit = number % 10;
+        if (digit != 4 && digit != 7) {
+            return 0;
         }
-        k /= 10;
+        number /= 10;
     }
-    return a;
+    return 1;
 }
 
-int tshans(int m){
-    int i;
-    for(i = 4;i<=m;i++){
-        if (m % i == 0){
-            if (shans(i)){
-                return 1;
-            }
+int hasLuckyDivisor(int number) {
+    for (int i = 4; i <= number; i++) {
+        if (number % i == 0 && isLucky(i)) {
+            return 1;
         }
     }
     return 0;
 }
 
-int main()
-{
-    int n,i,m;
-    scanf("%d",&n);
-    for(i=0;i<n;i++){
-        scanf("%d",&m);
-        if(tshans(m)){
-                printf("YES\n");
-        } else {
-            printf("NO\n");
-        }
+int main() {
+    int testCases, num;
+    scanf("%d", &testCases);
+    while (testCases--) {
+        scanf("%d", &num);
+        printf("%s\n", hasLuckyDivisor(num) ? "YES" : "NO");
     }
     return 0;
 }
