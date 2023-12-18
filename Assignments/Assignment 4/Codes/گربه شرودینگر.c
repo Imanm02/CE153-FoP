@@ -1,27 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
-{
-    bazgashti(-1);
-    return 0;
+int recursiveFunction(int cte) {
+    int number;
+    scanf("%d", &number);
+    if (number == 0) return 0;
+
+    while (cte <= number) {
+        printf("%d\n", cte);
+        number = recursiveFunction(number);
+        if (number == 0) return 0;
+    }
+
+    return (cte > number) ? number : 0;
 }
-int bazgashti(int cte)
-{
-    int num1;
-    scanf("%d", &num1);
-    if (num1 == 0) {
+
+int main() {
+    recursiveFunction(-1);
     return 0;
-    }
-
-    while (cte <= num1) {
-    printf("%d\n", cte);
-    num1 = bazgashti(num1);
-    if (num1==0){return 0;}
-    }
-
-    if (cte > num1) {
-    return (num1);
-    }
-
 }
